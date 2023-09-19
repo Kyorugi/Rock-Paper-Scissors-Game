@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
+import { ScorePoints } from "./componentsTypes";
 
-export const ScoreBoard = () => {
+export const ScoreBoard: React.FC<ScorePoints> = ({ score }) => {
   return (
     <ScoreBoardContainer>
       <GameElementsName>
@@ -10,7 +11,7 @@ export const ScoreBoard = () => {
       </GameElementsName>
       <ScoreBlock>
         <p>SCORE</p>
-        <p>12</p>
+        <p>{score}</p>
       </ScoreBlock>
     </ScoreBoardContainer>
   );
