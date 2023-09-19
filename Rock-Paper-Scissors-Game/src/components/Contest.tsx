@@ -53,6 +53,10 @@ const Paper = styled.div`
   margin: 10px;
   margin-right: 70px;
   transition: transform 0.2s;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.1);
+  }
   box-shadow: 0px 5px 0px
     hsla(229.88372093023256, 88.659793814433%, 61.96078431372549%, 0.752);
 `;
@@ -76,6 +80,10 @@ const Scissors = styled.div`
   margin: 10px;
   margin-left: 70px;
   transition: transform 0.2s;
+  &:hover {
+    transform: scale(1.1);
+  }
+  cursor: pointer;
   box-shadow: 0px 5px 0px
     hsla(38.91891891891891, 88.79999999999998%, 49.01960784313726%, 0.634);
 `;
@@ -94,6 +102,10 @@ const Rock = styled.div`
   align-items: center;
   margin: 10px;
   transition: transform 0.2s;
+  &:hover {
+    transform: scale(1.1);
+  }
+  cursor: pointer;
   box-shadow: 0px 5px 0px
     hsla(348.9655172413793, 71.31147540983608%, 52.156862745098046%, 0.732);
 `;
