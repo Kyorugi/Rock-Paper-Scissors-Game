@@ -1,12 +1,11 @@
 import { styled } from "styled-components";
 import { UserProperties } from "./componentsTypes";
 import { Link } from "react-router-dom";
-// import { Link } from "react-router-dom";
 
 export const Contest: React.FC<UserProperties> = ({ setMyChoice }) => {
   const setChoice = (e: React.MouseEvent<HTMLDivElement>) => {
     if (setMyChoice) {
-      e.currentTarget.id;
+      setMyChoice(e.currentTarget.id);
     }
   };
 
@@ -18,12 +17,12 @@ export const Contest: React.FC<UserProperties> = ({ setMyChoice }) => {
         </Paper>
       </Link>
       <Link to="/game">
-        <Scissors>
+        <Scissors onClick={setChoice} id="scissors">
           <ScissorsImg src="icon-scissors.svg" alt="scissors" />
         </Scissors>
       </Link>
-      <Link to="/game">
-        <Rock>
+      <Link to="game">
+        <Rock onClick={setChoice} id="rock">
           <RockImg src="icon-rock.svg" alt="scissors" />
         </Rock>
       </Link>
@@ -76,11 +75,7 @@ export const Paper = styled.div`
     hsla(229.88372093023256, 88.659793814433%, 61.96078431372549%, 0.752);
 `;
 
-export const PaperImg = styled.img`
-  background-position: center;
-  background-repeat: no-repeat;
-  /* box-shadow: 0px -5px 0px #ffffff43; */
-`;
+export const PaperImg = styled.img``;
 
 export const Scissors = styled.div`
   width: 145px;
