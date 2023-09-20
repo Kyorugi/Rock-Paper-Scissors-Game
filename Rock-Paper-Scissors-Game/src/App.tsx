@@ -1,20 +1,26 @@
 import { GameWrapper } from "./components/Game-wrapper.styled";
 import { ScoreBoard } from "./components/Scoreboard";
 import { Contest } from "./components/Contest";
-// import { Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import "./App.css";
-// import { ScorePoints } from "./components/componentsTypes";
+import { Game } from "./components/Game";
 
 function App() {
-  // const [myChoice, setMyChoice] = useState("");
+  const [myChoice, setMyChoice] = useState<string>("");
   const [score, setScore] = useState<number>(0);
 
   return (
     <>
       <GameWrapper>
         <ScoreBoard score={score} />
-        <Contest />
+        <Routes>
+          <Route path="/" element={<Contest setMyChoice={setMyChoice} />} />
+          <Route
+            path="game"
+            element={<Game myChoice={myChoice} setScore={setScore} />}
+          />
+        </Routes>
       </GameWrapper>
     </>
   );
