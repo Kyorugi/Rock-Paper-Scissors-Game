@@ -1,17 +1,31 @@
 import { styled } from "styled-components";
+import { UserProperties } from "./componentsTypes";
+import { Link } from "react-router-dom";
 
-export const Contest = () => {
+export const Contest: React.FC<UserProperties> = ({ setMyChoice }) => {
+  const setChoice = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (setMyChoice) {
+      setMyChoice(e.currentTarget.id);
+    }
+  };
+
   return (
     <GameContainer>
-      <Paper>
-        <PaperImg src="icon-paper.svg" alt="paper" />
-      </Paper>
-      <Scissors>
-        <ScissorsImg src="icon-scissors.svg" alt="scissors" />
-      </Scissors>
-      <Rock>
-        <RockImg src="icon-rock.svg" alt="scissors" />
-      </Rock>
+      <Link to="/game">
+        <Paper onClick={setChoice} id="paper">
+          <PaperImg src="icon-paper.svg" alt="paper" />
+        </Paper>
+      </Link>
+      <Link to="/game">
+        <Scissors onClick={setChoice} id="scissors">
+          <ScissorsImg src="icon-scissors.svg" alt="scissors" />
+        </Scissors>
+      </Link>
+      <Link to="game">
+        <Rock onClick={setChoice} id="rock">
+          <RockImg src="icon-rock.svg" alt="scissors" />
+        </Rock>
+      </Link>
     </GameContainer>
   );
 };
@@ -40,7 +54,7 @@ const GameContainer = styled.div`
   }
 `;
 
-const Paper = styled.div`
+export const Paper = styled.div`
   width: 145px;
   height: 145px;
   border-radius: 50%;
@@ -61,13 +75,9 @@ const Paper = styled.div`
     hsla(229.88372093023256, 88.659793814433%, 61.96078431372549%, 0.752);
 `;
 
-const PaperImg = styled.img`
-  background-position: center;
-  background-repeat: no-repeat;
-  /* box-shadow: 0px -5px 0px #ffffff43; */
-`;
+export const PaperImg = styled.img``;
 
-const Scissors = styled.div`
+export const Scissors = styled.div`
   width: 145px;
   height: 145px;
   border-radius: 50%;
@@ -88,9 +98,9 @@ const Scissors = styled.div`
     hsla(38.91891891891891, 88.79999999999998%, 49.01960784313726%, 0.634);
 `;
 
-const ScissorsImg = styled.img``;
+export const ScissorsImg = styled.img``;
 
-const Rock = styled.div`
+export const Rock = styled.div`
   width: 145px;
   height: 145px;
   border-radius: 50%;
@@ -110,4 +120,4 @@ const Rock = styled.div`
     hsla(348.9655172413793, 71.31147540983608%, 52.156862745098046%, 0.732);
 `;
 
-const RockImg = styled.img``;
+export const RockImg = styled.img``;

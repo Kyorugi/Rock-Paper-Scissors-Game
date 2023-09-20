@@ -14,5 +14,36 @@ module.exports = {
       "warn",
       { allowConstantExport: true },
     ],
+    "no-unused-vars": [
+      "error",
+      { vars: "all", args: "after-used", ignoreRestSiblings: false },
+    ],
+    "@typescript-eslint/no-unused-vars": [
+      "warn", // or "error"
+      {
+        argsIgnorePattern: "^_",
+        varsIgnorePattern: "^_",
+        caughtErrorsIgnorePattern: "^_",
+      },
+    ],
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        selector: ["parameter", "variable"],
+        leadingUnderscore: "forbid",
+        filter: {
+          // keep this one open for destructuring
+          regex: "_*",
+          match: false,
+        },
+        format: null,
+      },
+      {
+        selector: "parameter",
+        leadingUnderscore: "require",
+        format: null,
+        modifiers: ["unused"],
+      },
+    ],
   },
 };
