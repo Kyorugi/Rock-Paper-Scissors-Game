@@ -5,6 +5,10 @@ export interface UserProperties {
   setScore?: React.Dispatch<React.SetStateAction<number>>;
 }
 
-// export interface UserChoice {
-//   myChoice: string;
-// }
+export type ResultMapping = {
+  [key: string]: string;
+};
+
+export interface ChoiceProps {
+  choice: string | undefined;
+}
