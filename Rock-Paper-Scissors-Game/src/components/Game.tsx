@@ -9,12 +9,10 @@ import {
   RockImg,
   Rock,
 } from "./Contest";
+import { ResultMapping } from "./componentsTypes";
+import { ChoiceProps } from "./componentsTypes";
 
-export const Game: React.FC<UserProperties> = ({
-  myChoice,
-  score,
-  setScore,
-}) => {
+export const Game: React.FC<UserProperties> = ({ myChoice, setScore }) => {
   const [house, setHouse] = useState<string>("");
   const [playerWin, setPlayerWin] = useState<string>("");
   const [count, setCount] = useState<number>(3);
@@ -29,38 +27,31 @@ export const Game: React.FC<UserProperties> = ({
   }, []);
 
   const result = () => {
-    if (myChoice === "paper" && house === "scissors") {
-      setPlayerWin("lose");
-      if (setScore && score !== undefined) {
-        setScore(score - 1);
-      }
-    } else if (myChoice === "paper" && house === "rock") {
-      setPlayerWin("win");
-      if (setScore && score !== undefined) {
-        setScore(score + 1);
-      }
-    } else if (myChoice === "rock" && house === "scissors") {
-      setPlayerWin("win");
-      if (setScore && score !== undefined) {
-        setScore(score + 1);
-      }
-    } else if (myChoice === "rock" && house === "paper") {
-      setPlayerWin("lose");
-      if (setScore && score !== undefined) {
-        setScore(score - 1);
-      }
-    } else if (myChoice === "scissors" && house === "rock") {
-      setPlayerWin("lose");
-      if (setScore && score !== undefined) {
-        setScore(score - 1);
-      }
-    } else if (myChoice === "scissors" && house === "paper") {
-      setPlayerWin("win");
-      if (setScore && score !== undefined) {
-        setScore(score + 1);
-      }
-    } else {
-      setPlayerWin("draw");
+    const resultMapping: ResultMapping = {
+      "paper-scissors": "lose",
+      "paper-rock": "win",
+      "rock-scissors": "win",
+      "rock-paper": "lose",
+      "scissors-rock": "lose",
+      "scissors-paper": "win",
+    };
+
+    const resultKey = `${myChoice}-${house}`;
+    const playerResult: string = resultMapping[resultKey] || "draw";
+
+    setPlayerWin(playerResult);
+
+    if (setScore) {
+      setScore((prevScore) => {
+        switch (playerResult) {
+          case "win":
+            return prevScore + 1;
+          case "lose":
+            return prevScore - 1;
+          default:
+            return prevScore;
+        }
+      });
     }
   };
 
@@ -71,7 +62,6 @@ export const Game: React.FC<UserProperties> = ({
             setCount(count - 1);
           }, 1000)
         : result();
-
     return () => {
       if (timer !== undefined) {
         clearInterval(timer);
@@ -79,46 +69,39 @@ export const Game: React.FC<UserProperties> = ({
     };
   }, [count, house]);
 
+  const GameChoice: React.FC<ChoiceProps> = ({ choice }) => {
+    return (
+      <>
+        {choice === "paper" && (
+          <Paper>
+            <PaperImg src={`icon-${choice}.svg`} alt="paper" />
+          </Paper>
+        )}
+        {choice === "scissors" && (
+          <Scissors>
+            <ScissorsImg src={`icon-${choice}.svg`} alt="scissors" />
+          </Scissors>
+        )}
+        {choice === "rock" && (
+          <Rock>
+            <RockImg src={`icon-${choice}.svg`} alt="rock" />
+          </Rock>
+        )}
+      </>
+    );
+  };
+
   return (
     <PlayContainer>
       <GameYou>
         <YouText>You Picked</YouText>
-        {myChoice === "paper" && (
-          <Paper>
-            <PaperImg src="icon-paper.svg" alt="paper" />
-          </Paper>
-        )}
-        {myChoice === "scissors" && (
-          <Scissors>
-            <ScissorsImg src="icon-scissors.svg" alt="scissors" />
-          </Scissors>
-        )}
-        {myChoice === "rock" && (
-          <Rock>
-            <RockImg src="icon-rock.svg" alt="rock" />
-          </Rock>
-        )}
+        <GameChoice choice={myChoice} />
       </GameYou>
       <GameHouse>
         <HouseText>The House Picked</HouseText>
-        {count == 0 ? (
+        {count === 0 ? (
           <div>
-            {" "}
-            {house === "paper" && (
-              <Paper>
-                <PaperImg src="icon-paper.svg" alt="paper" />
-              </Paper>
-            )}
-            {house === "scissors" && (
-              <Scissors>
-                <ScissorsImg src="icon-scissors.svg" alt="scissors" />
-              </Scissors>
-            )}
-            {house === "rock" && (
-              <Rock>
-                <RockImg src="icon-rock.svg" alt="rock" />
-              </Rock>
-            )}
+            <GameChoice choice={house} />
           </div>
         ) : (
           <div>{count}</div>
@@ -126,6 +109,53 @@ export const Game: React.FC<UserProperties> = ({
       </GameHouse>
     </PlayContainer>
   );
+  // return (
+  //   <PlayContainer>
+  //     <GameYou>
+  //       <YouText>You Picked</YouText>
+  //       {myChoice === "paper" && (
+  //         <Paper>
+  //           <PaperImg src={`icon-${myChoice}.svg`} alt="paper" />
+  //         </Paper>
+  //       )}
+  //       {myChoice === "scissors" && (
+  //         <Scissors>
+  //           <ScissorsImg src={`icon-${myChoice}.svg`} alt="scissors" />
+  //         </Scissors>
+  //       )}
+  //       {myChoice === "rock" && (
+  //         <Rock>
+  //           <RockImg src={`icon-${myChoice}.svg`} alt="rock" />
+  //         </Rock>
+  //       )}
+  //     </GameYou>
+  //     <GameHouse>
+  //       <HouseText>The House Picked</HouseText>
+  //       {count == 0 ? (
+  //         <div>
+  //           {" "}
+  //           {house === "paper" && (
+  //             <Paper>
+  //               <PaperImg src={`icon-${myChoice}.svg`} alt="paper" />
+  //             </Paper>
+  //           )}
+  //           {house === "scissors" && (
+  //             <Scissors>
+  //               <ScissorsImg src={`icon-${myChoice}.svg`} alt="scissors" />
+  //             </Scissors>
+  //           )}
+  //           {house === "rock" && (
+  //             <Rock>
+  //               <RockImg src={`icon-${myChoice}.svg`} alt="rock" />
+  //             </Rock>
+  //           )}
+  //         </div>
+  //       ) : (
+  //         <div>{count}</div>
+  //       )}
+  //     </GameHouse>
+  //   </PlayContainer>
+  // );
 };
 
 const PlayContainer = styled.div`
