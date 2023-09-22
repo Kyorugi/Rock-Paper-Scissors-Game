@@ -9,13 +9,14 @@ import {
   RockImg,
   Rock,
 } from "./Contest";
-import { ResultMapping } from "./componentsTypes";
-import { ChoiceProps } from "./componentsTypes";
+import { ResultMapping, ChoiceProps } from "./componentsTypes";
 
 export const Game: React.FC<UserProperties> = ({ myChoice, setScore }) => {
   const [house, setHouse] = useState<string>("");
   const [playerWin, setPlayerWin] = useState<string>("");
   const [count, setCount] = useState<number>(3);
+  const [showButton, setShowButton] = useState<boolean>();
+  const [showResult, setShowResult] = useState<string>();
 
   const housePick = () => {
     const choices = ["paper", "scissors", "rock"];
@@ -91,14 +92,39 @@ export const Game: React.FC<UserProperties> = ({ myChoice, setScore }) => {
     );
   };
 
+  useEffect(() => {
+    if (playerWin === "win" || playerWin === "lose" || playerWin === "draw") {
+      setShowButton(true);
+    } else {
+      setShowButton(false);
+    }
+  }, [playerWin]);
+
+  useEffect(() => {
+    if (playerWin === "win") {
+      setShowResult("YOU WIN");
+    }
+    if (playerWin === "lose") {
+      setShowResult("YOU LOST");
+    } else if (playerWin === "draw") {
+      setShowResult("DRAW");
+    }
+  });
+
   return (
     <PlayContainer>
       <GameYou>
-        <YouText>You Picked</YouText>
+        <YouText>YOU PICKED</YouText>
         <GameChoice choice={myChoice} />
       </GameYou>
+      {showButton && (
+        <div>
+          <div>{showResult}</div>
+          <PlayAgain>PLAY AGAIN</PlayAgain>
+        </div>
+      )}
       <GameHouse>
-        <HouseText>The House Picked</HouseText>
+        <HouseText>THE HOUSE PICKED</HouseText>
         {count === 0 ? (
           <div>
             <GameChoice choice={house} />
@@ -109,53 +135,6 @@ export const Game: React.FC<UserProperties> = ({ myChoice, setScore }) => {
       </GameHouse>
     </PlayContainer>
   );
-  // return (
-  //   <PlayContainer>
-  //     <GameYou>
-  //       <YouText>You Picked</YouText>
-  //       {myChoice === "paper" && (
-  //         <Paper>
-  //           <PaperImg src={`icon-${myChoice}.svg`} alt="paper" />
-  //         </Paper>
-  //       )}
-  //       {myChoice === "scissors" && (
-  //         <Scissors>
-  //           <ScissorsImg src={`icon-${myChoice}.svg`} alt="scissors" />
-  //         </Scissors>
-  //       )}
-  //       {myChoice === "rock" && (
-  //         <Rock>
-  //           <RockImg src={`icon-${myChoice}.svg`} alt="rock" />
-  //         </Rock>
-  //       )}
-  //     </GameYou>
-  //     <GameHouse>
-  //       <HouseText>The House Picked</HouseText>
-  //       {count == 0 ? (
-  //         <div>
-  //           {" "}
-  //           {house === "paper" && (
-  //             <Paper>
-  //               <PaperImg src={`icon-${myChoice}.svg`} alt="paper" />
-  //             </Paper>
-  //           )}
-  //           {house === "scissors" && (
-  //             <Scissors>
-  //               <ScissorsImg src={`icon-${myChoice}.svg`} alt="scissors" />
-  //             </Scissors>
-  //           )}
-  //           {house === "rock" && (
-  //             <Rock>
-  //               <RockImg src={`icon-${myChoice}.svg`} alt="rock" />
-  //             </Rock>
-  //           )}
-  //         </div>
-  //       ) : (
-  //         <div>{count}</div>
-  //       )}
-  //     </GameHouse>
-  //   </PlayContainer>
-  // );
 };
 
 const PlayContainer = styled.div`
@@ -180,4 +159,11 @@ const YouText = styled.span`
 
 const HouseText = styled.span`
   color: white;
+`;
+
+const PlayAgain = styled.button`
+  color: red;
+  width: 150px;
+  height: 40px;
+  border-radius: 10px;
 `;
