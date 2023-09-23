@@ -10,6 +10,7 @@ import {
   Rock,
 } from "./Contest";
 import { ResultMapping, ChoiceProps } from "./componentsTypes";
+import { Link } from "react-router-dom";
 
 export const Game: React.FC<UserProperties> = ({ myChoice, setScore }) => {
   const [house, setHouse] = useState<string>("");
@@ -105,7 +106,7 @@ export const Game: React.FC<UserProperties> = ({ myChoice, setScore }) => {
       setShowResult("YOU WIN");
     }
     if (playerWin === "lose") {
-      setShowResult("YOU LOST");
+      setShowResult("YOU LOSE");
     } else if (playerWin === "draw") {
       setShowResult("DRAW");
     }
@@ -118,10 +119,12 @@ export const Game: React.FC<UserProperties> = ({ myChoice, setScore }) => {
         <GameChoice choice={myChoice} />
       </GameYou>
       {showButton && (
-        <div>
-          <div>{showResult}</div>
-          <PlayAgain>PLAY AGAIN</PlayAgain>
-        </div>
+        <ResultContainer>
+          <ShowResult>{showResult}</ShowResult>
+          <Link to="/">
+            <PlayAgain>PLAY AGAIN</PlayAgain>
+          </Link>
+        </ResultContainer>
       )}
       <GameHouse>
         <HouseText>THE HOUSE PICKED</HouseText>
@@ -154,16 +157,40 @@ const GameHouse = styled.div`
 `;
 
 const YouText = styled.span`
-  color: white;
+  color: #fff;
 `;
 
 const HouseText = styled.span`
-  color: white;
+  color: #fff;
 `;
 
 const PlayAgain = styled.button`
   color: red;
-  width: 150px;
+  min-width: max-content;
   height: 40px;
-  border-radius: 10px;
+  border-radius: 7px;
+  cursor: pointer;
+  background-color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  font-size: 0.8rem;
+  border: none;
+  margin: 5px;
+`;
+
+const ShowResult = styled.p`
+  font-size: 33px;
+  color: #fff;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  min-width: max-content;
+  margin: 5px;
+`;
+
+const ResultContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: max-content;
 `;

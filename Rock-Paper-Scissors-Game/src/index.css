@@ -8,6 +8,7 @@
 
 :root {
   font-family: "Barlow Semi Condensed", sans-serif;
+  letter-spacing: 1.5px;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -17,8 +18,5 @@
 body {
   margin: 0;
   display: flex;
-  /* place-items: center;
-  width: 100vh;
-  height: 100vh; */
   background: radial-gradient(hsl(214, 47%, 23%), hsl(237, 49%, 15%));
 }
