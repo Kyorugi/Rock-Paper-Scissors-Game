@@ -121,8 +121,8 @@ export const Game: React.FC<UserProperties> = ({ myChoice, setScore }) => {
       {showButton && (
         <ResultContainer>
           <ShowResult>{showResult}</ShowResult>
-          <Link to="/">
-            <PlayAgain>PLAY AGAIN</PlayAgain>
+          <Link to="/" className="playAgain">
+            PLAY AGAIN
           </Link>
         </ResultContainer>
       )}
@@ -133,7 +133,7 @@ export const Game: React.FC<UserProperties> = ({ myChoice, setScore }) => {
             <GameChoice choice={house} />
           </div>
         ) : (
-          <div>{count}</div>
+          <Counting>{count}</Counting>
         )}
       </GameHouse>
     </PlayContainer>
@@ -164,33 +164,29 @@ const HouseText = styled.span`
   color: #fff;
 `;
 
-const PlayAgain = styled.button`
-  color: red;
-  min-width: max-content;
-  height: 40px;
-  border-radius: 7px;
-  cursor: pointer;
-  background-color: #fff;
-  text-decoration: none;
-  text-transform: uppercase;
-  padding: 10px 20px;
-  font-size: 0.8rem;
-  border: none;
-  margin: 5px;
+const ResultContainer = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
-const ShowResult = styled.p`
+const ShowResult = styled.span`
   font-size: 33px;
   color: #fff;
   display: flex;
   text-align: center;
   justify-content: center;
-  min-width: max-content;
-  margin: 5px;
+  margin-bottom: 10px;
 `;
 
-const ResultContainer = styled.div`
+const Counting = styled.div`
   display: flex;
   flex-direction: column;
-  width: max-content;
+  justify-content: center;
+  text-align: center;
+  height: 250px;
+  width: 250px;
+  font-size: 100px;
+  color: #fff;
+  border-radius: 50%;
+  background-color: #16213d;
 `;
