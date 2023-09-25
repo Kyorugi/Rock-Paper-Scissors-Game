@@ -75,18 +75,54 @@ export const Game: React.FC<UserProperties> = ({ myChoice, setScore }) => {
     return (
       <>
         {choice === "paper" && (
-          <Paper>
-            <PaperImg src={`icon-${choice}.svg`} alt="paper" />
+          <Paper
+            style={{
+              width: "250px",
+              height: "250px",
+              border: "30px solid",
+              borderColor: "hsl(230, 89%, 62%)",
+              margin: "0",
+            }}
+          >
+            <PaperImg
+              src={`icon-${choice}.svg`}
+              alt="paper"
+              style={{ width: "80px", height: "85px" }}
+            />
           </Paper>
         )}
         {choice === "scissors" && (
-          <Scissors>
-            <ScissorsImg src={`icon-${choice}.svg`} alt="scissors" />
+          <Scissors
+            style={{
+              width: "250px",
+              height: "250px",
+              border: "30px solid",
+              borderColor: "hsl(39, 89%, 49%)",
+              margin: "0",
+            }}
+          >
+            <ScissorsImg
+              src={`icon-${choice}.svg`}
+              alt="scissors"
+              style={{ width: "80px", height: "85px" }}
+            />
           </Scissors>
         )}
         {choice === "rock" && (
-          <Rock>
-            <RockImg src={`icon-${choice}.svg`} alt="rock" />
+          <Rock
+            style={{
+              width: "250px",
+              height: "250px",
+              border: "30px solid",
+              borderColor: "hsl(349, 71%, 52%)",
+              margin: "0",
+            }}
+          >
+            <RockImg
+              src={`icon-${choice}.svg`}
+              alt="rock"
+              style={{ width: "80px", height: "85px" }}
+            />
           </Rock>
         )}
       </>
@@ -149,24 +185,33 @@ const PlayContainer = styled.div`
 const GameYou = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  margin: 20px;
 `;
 
 const GameHouse = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  margin: 20px;
 `;
 
 const YouText = styled.span`
   color: #fff;
+  margin: 5px 0px 40px;
 `;
 
 const HouseText = styled.span`
   color: #fff;
+  margin: 5px 0px 40px;
 `;
 
 const ResultContainer = styled.div`
   display: flex;
   flex-direction: column;
+  height: 250px;
+  justify-content: center;
+  margin: 70px;
 `;
 
 const ShowResult = styled.span`

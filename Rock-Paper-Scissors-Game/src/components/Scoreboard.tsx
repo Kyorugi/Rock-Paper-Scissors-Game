@@ -18,7 +18,7 @@ export const ScoreBoard: React.FC<UserProperties> = ({ score }) => {
 };
 
 const ScoreBoardContainer = styled.div`
-  margin: 40px;
+  margin: 40px 0px 0px;
   display: flex;
   justify-content: space-between;
   width: 700px;
