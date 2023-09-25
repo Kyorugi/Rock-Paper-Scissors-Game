@@ -11,4 +11,5 @@ export type ResultMapping = {
 
 export interface ChoiceProps {
   choice: string | undefined;
+  style?: React.CSSProperties;
 }
