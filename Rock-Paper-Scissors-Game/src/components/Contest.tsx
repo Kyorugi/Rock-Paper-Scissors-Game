@@ -47,10 +47,6 @@ const GameContainer = styled.div`
   img {
     width: 45px;
     height: 55px;
-    box-shadow:
-      inset 0px 5px 6px grey,
-      0px 8px darken($color, 15%);
-    /* display: block; */
   }
 `;
 
@@ -67,6 +63,7 @@ export const Paper = styled.div`
   margin: 10px;
   margin-right: 70px;
   transition: transform 0.2s;
+  position: relative;
   cursor: pointer;
   &:hover {
     transform: scale(1.1);

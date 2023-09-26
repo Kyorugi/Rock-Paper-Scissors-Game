@@ -11,6 +11,7 @@ import {
 } from "./Contest";
 import { ResultMapping, ChoiceProps } from "./componentsTypes";
 import { Link } from "react-router-dom";
+import "../index.css";
 
 export const Game: React.FC<UserProperties> = ({ myChoice, setScore }) => {
   const [house, setHouse] = useState<string>("");
@@ -72,16 +73,29 @@ export const Game: React.FC<UserProperties> = ({ myChoice, setScore }) => {
   }, [count, house]);
 
   const GameChoice: React.FC<ChoiceProps> = ({ choice }) => {
+    const baseStyles = {
+      width: "250px",
+      height: "250px",
+      border: "30px solid",
+      margin: "0",
+    };
+
+    if (playerWin === "win" || "lose") {
+      Object.assign(baseStyles, {
+        boxShadow:
+          "0px 0px 0px 50px rgba(255, 255, 255, 0.07), " +
+          "0px 0px 0px 100px rgba(255, 255, 255, 0.05), " +
+          "0px 0px 0px 150px rgba(255, 255, 255, 0.025)",
+      });
+    }
+
     return (
       <>
         {choice === "paper" && (
           <Paper
             style={{
-              width: "250px",
-              height: "250px",
-              border: "30px solid",
+              ...baseStyles,
               borderColor: "hsl(230, 89%, 62%)",
-              margin: "0",
             }}
           >
             <PaperImg
@@ -94,11 +108,8 @@ export const Game: React.FC<UserProperties> = ({ myChoice, setScore }) => {
         {choice === "scissors" && (
           <Scissors
             style={{
-              width: "250px",
-              height: "250px",
-              border: "30px solid",
+              ...baseStyles,
               borderColor: "hsl(39, 89%, 49%)",
-              margin: "0",
             }}
           >
             <ScissorsImg
@@ -111,11 +122,8 @@ export const Game: React.FC<UserProperties> = ({ myChoice, setScore }) => {
         {choice === "rock" && (
           <Rock
             style={{
-              width: "250px",
-              height: "250px",
-              border: "30px solid",
+              ...baseStyles,
               borderColor: "hsl(349, 71%, 52%)",
-              margin: "0",
             }}
           >
             <RockImg
