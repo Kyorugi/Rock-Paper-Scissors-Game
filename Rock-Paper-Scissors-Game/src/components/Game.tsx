@@ -19,6 +19,7 @@ export const Game: React.FC<UserProperties> = ({ myChoice, setScore }) => {
   const [count, setCount] = useState<number>(3);
   const [showButton, setShowButton] = useState<boolean>();
   const [showResult, setShowResult] = useState<string>();
+  const [houseWin, setHouseWin] = useState<boolean>();
 
   const housePick = () => {
     const choices = ["paper", "scissors", "rock"];
@@ -73,6 +74,7 @@ export const Game: React.FC<UserProperties> = ({ myChoice, setScore }) => {
   }, [count, house]);
 
   const GameChoice: React.FC<ChoiceProps> = ({ choice }) => {
+    console.log(choice);
     const baseStyles = {
       width: "250px",
       height: "250px",
@@ -80,13 +82,23 @@ export const Game: React.FC<UserProperties> = ({ myChoice, setScore }) => {
       margin: "0",
     };
 
-    if (playerWin === "win" || "lose") {
-      Object.assign(baseStyles, {
-        boxShadow:
-          "0px 0px 0px 50px rgba(255, 255, 255, 0.07), " +
-          "0px 0px 0px 100px rgba(255, 255, 255, 0.05), " +
-          "0px 0px 0px 150px rgba(255, 255, 255, 0.025)",
-      });
+    const winStyles = {
+      boxShadow:
+        "0px 0px 0px 50px rgba(255, 255, 255, 0.07), " +
+        "0px 0px 0px 100px rgba(255, 255, 255, 0.05), " +
+        "0px 0px 0px 150px rgba(255, 255, 255, 0.025)",
+    };
+
+    if (playerWin === "win" && house !== choice) {
+      Object.assign(baseStyles, winStyles);
+      console.log(house);
+      console.log(choice);
+      console.log(myChoice);
+    } else if (playerWin === "lose" && houseWin === true && house === choice) {
+      Object.assign(baseStyles, winStyles);
+      console.log(house);
+      console.log(choice);
+      console.log(myChoice);
     }
 
     return (
@@ -148,9 +160,11 @@ export const Game: React.FC<UserProperties> = ({ myChoice, setScore }) => {
   useEffect(() => {
     if (playerWin === "win") {
       setShowResult("YOU WIN");
+      setHouseWin(false);
     }
     if (playerWin === "lose") {
       setShowResult("YOU LOSE");
+      setHouseWin(true);
     } else if (playerWin === "draw") {
       setShowResult("DRAW");
     }
