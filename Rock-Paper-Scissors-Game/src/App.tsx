@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import "./App.css";
 import { Game } from "./components/Game";
+import { RulesModal } from "./components/Rules";
 
 function App() {
   const [myChoice, setMyChoice] = useState<string>("");
@@ -21,6 +22,7 @@ function App() {
             element={<Game myChoice={myChoice} setScore={setScore} />}
           />
         </Routes>
+        <RulesModal />
       </GameWrapper>
     </>
   );

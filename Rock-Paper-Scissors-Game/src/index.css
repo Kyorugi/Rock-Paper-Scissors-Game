@@ -28,10 +28,11 @@ body {
   cursor: pointer;
   background-color: #fff;
   text-decoration: none;
-  padding-top: 10px;
+  padding: 10px 5px 0 5px;
   font-size: 0.8rem;
   border: none;
   text-align: center;
+  margin-top: 10px;
 }
 
 .winnerShadow {
