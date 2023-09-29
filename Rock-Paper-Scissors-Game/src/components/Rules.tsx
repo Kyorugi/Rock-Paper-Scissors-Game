@@ -13,26 +13,15 @@ export const RulesModal = () => {
       transform: "translate(-50%, -50%)",
     },
     overlay: {
-      position: "fixed",
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
       backgroundColor: "transparent",
     },
   };
 
-  //   let subtitle;
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
   function openModal() {
     setIsOpen(true);
   }
-
-  //   function afterOpenModal() {
-  //     // references are now sync'd and can be accessed.
-  //     subtitle.style.color = " transparent";
-  //   }
 
   function closeModal() {
     setIsOpen(false);
