@@ -30,6 +30,12 @@ export const Game: React.FC<UserProperties> = ({ myChoice, setScore }) => {
     housePick();
   }, []);
 
+  function RestartGame() {
+    if (setScore) {
+      setScore(0);
+    }
+  }
+
   const result = () => {
     const resultMapping: ResultMapping = {
       "paper-scissors": "lose",
@@ -182,6 +188,9 @@ export const Game: React.FC<UserProperties> = ({ myChoice, setScore }) => {
           <Link to="/" className="playAgain">
             PLAY AGAIN
           </Link>
+          <Link to="/" className="playAgain" onClick={RestartGame}>
+            RESTART GAME
+          </Link>
         </ResultContainer>
       )}
       <GameHouse>
@@ -243,6 +252,7 @@ const ShowResult = styled.span`
   text-align: center;
   justify-content: center;
   margin-bottom: 10px;
+  letter-spacing: 5px;
 `;
 
 const Counting = styled.div`
