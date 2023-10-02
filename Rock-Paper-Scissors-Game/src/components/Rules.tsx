@@ -28,40 +28,51 @@ export const RulesModal = () => {
   }
 
   return (
-    <RulesContainer>
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        style={customStyles}
-        contentLabel="Example Modal"
-      >
-        <ButtonBlock>
-          <h2
-            style={{
-              color:
-                "hsl(216.66666666666663, 19.78021978021978%, 35.686274509803916%)",
-            }}
-          >
-            RULES
-          </h2>
+    <Footer>
+      <RulesContainer>
+        <Modal
+          isOpen={modalIsOpen}
+          onRequestClose={closeModal}
+          style={customStyles}
+          contentLabel="Example Modal"
+        >
+          <ButtonBlock>
+            <h2
+              style={{
+                color:
+                  "hsl(216.66666666666663, 19.78021978021978%, 35.686274509803916%)",
+              }}
+            >
+              RULES
+            </h2>
 
-          <img
-            src="/icon-close.svg"
-            onClick={closeModal}
-            style={{ cursor: "pointer" }}
-          />
-        </ButtonBlock>
-        <img src="/image-rules.svg" />
-      </Modal>
-      <RulerButton onClick={openModal}>RULES</RulerButton>
-    </RulesContainer>
+            <img
+              src="/icon-close.svg"
+              onClick={closeModal}
+              style={{ cursor: "pointer" }}
+            />
+          </ButtonBlock>
+          <img src="/image-rules.svg" />
+        </Modal>
+        <RulerButton onClick={openModal}>RULES</RulerButton>
+      </RulesContainer>
+    </Footer>
   );
 };
 
+const Footer = styled.div`
+  display: flex;
+  flex: 100%;
+  justify-content: center;
+  width: 100%;
+`;
+
 const RulesContainer = styled.div`
   display: flex;
+  flex: 100%;
+  max-width: 1000px;
   justify-content: end;
-  min-width: 1200px;
+  margin: 20px;
 `;
 
 const ButtonBlock = styled.div`
