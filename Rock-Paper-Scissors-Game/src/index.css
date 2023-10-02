@@ -1,7 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600&family=Inter:wght@400;700&family=Space+Mono:wght@700&display=swap");
 
 * {
-  padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
@@ -9,15 +8,12 @@
 :root {
   font-family: "Barlow Semi Condensed", sans-serif;
   letter-spacing: 1.5px;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  margin: 0;
 }
 
 body {
   margin: 0;
-  display: flex;
+  padding: 0;
+  height: 100vh;
   background: radial-gradient(hsl(214, 47%, 23%), hsl(237, 49%, 15%));
 }
 

@@ -4,27 +4,38 @@ import { UserProperties } from "./componentsTypes";
 export const ScoreBoard: React.FC<UserProperties> = ({ score }) => {
   return (
     <ScoreBoardContainer>
-      <GameElementsName>
-        <p>ROCK</p>
-        <p>PAPER</p>
-        <p>SCISSORS</p>
-      </GameElementsName>
-      <ScoreBlock>
-        <ScoreTitle>SCORE</ScoreTitle>
-        <Score>{score}</Score>
-      </ScoreBlock>
+      <RowContainer>
+        <GameElementsName>
+          <p>ROCK</p>
+          <p>PAPER</p>
+          <p>SCISSORS</p>
+        </GameElementsName>
+        <ScoreBlock>
+          <ScoreTitle>SCORE</ScoreTitle>
+          <Score>{score}</Score>
+        </ScoreBlock>
+      </RowContainer>
     </ScoreBoardContainer>
   );
 };
 
 const ScoreBoardContainer = styled.div`
-  margin: 40px 0px 0px;
+  margin: 30px 10px 30px 10px;
   display: flex;
-  justify-content: space-between;
-  width: 700px;
+  justify-content: center;
+  width: 100%;
   height: 150px;
+`;
+
+const RowContainer = styled.div`
   border-radius: 15px;
   border: 2px solid hsl(217, 16%, 45%);
+  height: 150px;
+  display: flex;
+  flex: 100%;
+  justify-content: space-between;
+  max-width: 700px;
+  margin: 10px;
 `;
 
 const GameElementsName = styled.div`

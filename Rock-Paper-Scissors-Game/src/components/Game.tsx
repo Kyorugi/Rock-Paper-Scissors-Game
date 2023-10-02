@@ -80,37 +80,31 @@ export const Game: React.FC<UserProperties> = ({ myChoice, setScore }) => {
   }, [count, house]);
 
   const GameChoice: React.FC<ChoiceProps> = ({ choice }) => {
-    console.log(choice);
     const baseStyles = {
-      width: "250px",
-      height: "250px",
-      border: "30px solid",
+      width: "220px",
+      height: "220px",
+      border: "25px solid",
       margin: "0",
     };
 
     const winStyles = {
       boxShadow:
-        "0px 0px 0px 50px rgba(255, 255, 255, 0.07), " +
-        "0px 0px 0px 100px rgba(255, 255, 255, 0.05), " +
-        "0px 0px 0px 150px rgba(255, 255, 255, 0.025)",
+        "0px 0px 0px 30px rgba(255, 255, 255, 0.07), " +
+        "0px 0px 0px 70px rgba(255, 255, 255, 0.05), " +
+        "0px 0px 0px 110px rgba(255, 255, 255, 0.025)",
     };
 
     if (playerWin === "win" && house !== choice) {
       Object.assign(baseStyles, winStyles);
-      console.log(house);
-      console.log(choice);
-      console.log(myChoice);
     } else if (playerWin === "lose" && houseWin === true && house === choice) {
       Object.assign(baseStyles, winStyles);
-      console.log(house);
-      console.log(choice);
-      console.log(myChoice);
     }
 
     return (
       <>
         {choice === "paper" && (
           <Paper
+            className="choice"
             style={{
               ...baseStyles,
               borderColor: "hsl(230, 89%, 62%)",
@@ -119,12 +113,13 @@ export const Game: React.FC<UserProperties> = ({ myChoice, setScore }) => {
             <PaperImg
               src={`icon-${choice}.svg`}
               alt="paper"
-              style={{ width: "80px", height: "85px" }}
+              style={{ width: "75px", height: "80px" }}
             />
           </Paper>
         )}
         {choice === "scissors" && (
           <Scissors
+            className="choice"
             style={{
               ...baseStyles,
               borderColor: "hsl(39, 89%, 49%)",
@@ -133,12 +128,13 @@ export const Game: React.FC<UserProperties> = ({ myChoice, setScore }) => {
             <ScissorsImg
               src={`icon-${choice}.svg`}
               alt="scissors"
-              style={{ width: "80px", height: "85px" }}
+              style={{ width: "75px", height: "80px" }}
             />
           </Scissors>
         )}
         {choice === "rock" && (
           <Rock
+            className="choice"
             style={{
               ...baseStyles,
               borderColor: "hsl(349, 71%, 52%)",
@@ -147,7 +143,7 @@ export const Game: React.FC<UserProperties> = ({ myChoice, setScore }) => {
             <RockImg
               src={`icon-${choice}.svg`}
               alt="rock"
-              style={{ width: "80px", height: "85px" }}
+              style={{ width: "75px", height: "80px" }}
             />
           </Rock>
         )}
@@ -178,12 +174,12 @@ export const Game: React.FC<UserProperties> = ({ myChoice, setScore }) => {
 
   return (
     <PlayContainer>
-      <GameYou>
+      <GameYou className="passageOfBlocks">
         <YouText>YOU PICKED</YouText>
         <GameChoice choice={myChoice} />
       </GameYou>
       {showButton && (
-        <ResultContainer>
+        <ResultContainer className="passageOfBlocks">
           <ShowResult>{showResult}</ShowResult>
           <Link to="/" className="playAgain">
             PLAY AGAIN
@@ -193,7 +189,7 @@ export const Game: React.FC<UserProperties> = ({ myChoice, setScore }) => {
           </Link>
         </ResultContainer>
       )}
-      <GameHouse>
+      <GameHouse className="passageOfBlocks">
         <HouseText>THE HOUSE PICKED</HouseText>
         {count === 0 ? (
           <div>
@@ -209,8 +205,32 @@ export const Game: React.FC<UserProperties> = ({ myChoice, setScore }) => {
 
 const PlayContainer = styled.div`
   display: flex;
-  flex-wrap: nowrap;
   align-items: center;
+
+  @media (max-width: 810px) {
+    justify-content: center;
+    flex-wrap: wrap;
+    .passageOfBlocks {
+      order: 0;
+      margin: 40px;
+    }
+
+    .passageOfBlocks:nth-child(2) {
+      order: 2;
+      margin: 5px;
+    }
+
+    .passageOfBlocks:nth-child(3) {
+      order: 1;
+    }
+  }
+
+  @media (max-width: 645px) {
+    width: 500px;
+    .passageOfBlocks {
+      margin: 15px;
+    }
+  }
 `;
 
 const GameYou = styled.div`
@@ -218,6 +238,10 @@ const GameYou = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 20px;
+
+  @media (max-width: 810px) {
+    flex-direction: column-reverse;
+  }
 `;
 
 const GameHouse = styled.div`
@@ -225,16 +249,28 @@ const GameHouse = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 20px;
+
+  @media (max-width: 810px) {
+    flex-direction: column-reverse;
+  }
 `;
 
 const YouText = styled.span`
   color: #fff;
   margin: 5px 0px 40px;
+
+  @media (max-width: 810px) {
+    margin-top: 40px;
+  }
 `;
 
 const HouseText = styled.span`
   color: #fff;
   margin: 5px 0px 40px;
+
+  @media (max-width: 810px) {
+    margin-top: 40px;
+  }
 `;
 
 const ResultContainer = styled.div`
