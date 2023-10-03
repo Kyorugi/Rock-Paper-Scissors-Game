@@ -80,12 +80,18 @@ export const Game: React.FC<UserProperties> = ({ myChoice, setScore }) => {
   }, [count, house]);
 
   const GameChoice: React.FC<ChoiceProps> = ({ choice }) => {
-    const baseStyles = {
+    const [baseStyles, setBaseStyles] = useState({
       width: "220px",
       height: "220px",
-      border: "25px solid",
+      borderWidth: "25px",
+      borderColor: "",
       margin: "0",
-    };
+    });
+
+    const [imgStyle, setImgStyle] = useState({
+      width: "75px",
+      height: "80px",
+    });
 
     const winStyles = {
       boxShadow:
@@ -93,6 +99,48 @@ export const Game: React.FC<UserProperties> = ({ myChoice, setScore }) => {
         "0px 0px 0px 70px rgba(255, 255, 255, 0.05), " +
         "0px 0px 0px 110px rgba(255, 255, 255, 0.025)",
     };
+
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+      const screenWidth = window.innerWidth;
+
+      if (screenWidth <= 810) {
+        setBaseStyles({
+          ...baseStyles,
+          width: "150px",
+          height: "150px",
+          borderWidth: "20px",
+          borderColor: "",
+        });
+        setImgStyle({
+          ...imgStyle,
+          width: "45px",
+          height: "50px",
+        });
+      } else {
+        setBaseStyles((prevStyles) => ({
+          ...prevStyles,
+          width: "220px",
+          height: "220px",
+          borderWidth: "25px",
+          borderColor: "",
+        }));
+        setImgStyle((prevStyle) => ({
+          ...prevStyle,
+          width: "75px",
+          height: "80px",
+        }));
+      }
+
+      const handleWindowResize = () => {
+        setScreenWidth(window.innerWidth);
+      };
+      window.addEventListener("resize", handleWindowResize);
+      return () => {
+        window.removeEventListener("resize", handleWindowResize);
+      };
+    }, [screenWidth]);
 
     if (playerWin === "win" && house !== choice) {
       Object.assign(baseStyles, winStyles);
@@ -105,45 +153,36 @@ export const Game: React.FC<UserProperties> = ({ myChoice, setScore }) => {
         {choice === "paper" && (
           <Paper
             className="choice"
-            style={{
-              ...baseStyles,
-              borderColor: "hsl(230, 89%, 62%)",
-            }}
+            style={{ ...baseStyles, borderColor: "hsl(230, 89%, 62%)" }}
           >
             <PaperImg
               src={`icon-${choice}.svg`}
               alt="paper"
-              style={{ width: "75px", height: "80px" }}
+              style={{ ...imgStyle }}
             />
           </Paper>
         )}
         {choice === "scissors" && (
           <Scissors
             className="choice"
-            style={{
-              ...baseStyles,
-              borderColor: "hsl(39, 89%, 49%)",
-            }}
+            style={{ ...baseStyles, borderColor: "hsl(39, 89%, 49%)" }}
           >
             <ScissorsImg
               src={`icon-${choice}.svg`}
               alt="scissors"
-              style={{ width: "75px", height: "80px" }}
+              style={{ ...imgStyle }}
             />
           </Scissors>
         )}
         {choice === "rock" && (
           <Rock
             className="choice"
-            style={{
-              ...baseStyles,
-              borderColor: "hsl(349, 71%, 52%)",
-            }}
+            style={{ ...baseStyles, borderColor: "hsl(349, 71%, 52%)" }}
           >
             <RockImg
               src={`icon-${choice}.svg`}
               alt="rock"
-              style={{ width: "75px", height: "80px" }}
+              style={{ ...imgStyle }}
             />
           </Rock>
         )}
@@ -206,18 +245,18 @@ export const Game: React.FC<UserProperties> = ({ myChoice, setScore }) => {
 const PlayContainer = styled.div`
   display: flex;
   align-items: center;
+  margin-bottom: 30px;
 
-  @media (max-width: 810px) {
+  @media (max-width: 495px) {
     justify-content: center;
     flex-wrap: wrap;
     .passageOfBlocks {
       order: 0;
-      margin: 40px;
+      margin: 20px;
     }
 
     .passageOfBlocks:nth-child(2) {
       order: 2;
-      margin: 5px;
     }
 
     .passageOfBlocks:nth-child(3) {
@@ -226,7 +265,6 @@ const PlayContainer = styled.div`
   }
 
   @media (max-width: 645px) {
-    width: 500px;
     .passageOfBlocks {
       margin: 15px;
     }
@@ -237,9 +275,9 @@ const GameYou = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 20px;
+  margin-right: 20px;
 
-  @media (max-width: 810px) {
+  @media (max-width: 495px) {
     flex-direction: column-reverse;
   }
 `;
@@ -248,9 +286,9 @@ const GameHouse = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 20px;
+  margin-left: 20px;
 
-  @media (max-width: 810px) {
+  @media (max-width: 495px) {
     flex-direction: column-reverse;
   }
 `;
@@ -259,7 +297,7 @@ const YouText = styled.span`
   color: #fff;
   margin: 5px 0px 40px;
 
-  @media (max-width: 810px) {
+  @media (max-width: 537px) {
     margin-top: 40px;
   }
 `;
@@ -268,7 +306,7 @@ const HouseText = styled.span`
   color: #fff;
   margin: 5px 0px 40px;
 
-  @media (max-width: 810px) {
+  @media (max-width: 537px) {
     margin-top: 40px;
   }
 `;

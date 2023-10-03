@@ -73,6 +73,10 @@ const RulesContainer = styled.div`
   max-width: 1000px;
   justify-content: end;
   margin: 20px;
+
+  @media (max-width: 810px) {
+    justify-content: center;
+  }
 `;
 
 const ButtonBlock = styled.div`
