@@ -48,6 +48,11 @@ const GameContainer = styled.div`
     width: 45px;
     height: 55px;
   }
+
+  @media (max-width: 450px) {
+    width: 380px;
+    background-size: 300px;
+  }
 `;
 
 export const Paper = styled.div`
@@ -70,6 +75,11 @@ export const Paper = styled.div`
   }
   box-shadow: 0px 5px 0px
     hsla(229.88372093023256, 88.659793814433%, 61.96078431372549%, 0.752);
+
+  @media (max-width: 450px) {
+    width: 110px;
+    height: 110px;
+  }
 `;
 
 export const PaperImg = styled.img``;
@@ -93,6 +103,11 @@ export const Scissors = styled.div`
   cursor: pointer;
   box-shadow: 0px 5px 0px
     hsla(38.91891891891891, 88.79999999999998%, 49.01960784313726%, 0.634);
+
+  @media (max-width: 450px) {
+    width: 110px;
+    height: 110px;
+  }
 `;
 
 export const ScissorsImg = styled.img``;
@@ -115,6 +130,11 @@ export const Rock = styled.div`
   cursor: pointer;
   box-shadow: 0px 5px 0px
     hsla(348.9655172413793, 71.31147540983608%, 52.156862745098046%, 0.732);
+
+  @media (max-width: 450px) {
+    width: 110px;
+    height: 110px;
+  }
 `;
 
 export const RockImg = styled.img``;

@@ -42,7 +42,7 @@ const GameElementsName = styled.div`
   font-weight: 600;
   font-size: 22px;
   color: white;
-  margin: 10px 15px 10px 20px;
+  margin: 10px 10px 10px 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -58,7 +58,7 @@ const ScoreBlock = styled.div`
   background-color: white;
   width: 140px;
   height: 120px;
-  margin: 10px 15px 10px 20px;
+  margin: 10px 10px 10px 10px;
   padding-top: 10px;
   border-radius: 10px;
 `;
